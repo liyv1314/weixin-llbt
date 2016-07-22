@@ -8,7 +8,7 @@ define("TOKEN", "weixin");
 
 $wechatObj = new wechatCallbackapiTest();
 //$wechatObj->valid(); 
-//æ³¨é‡Šæ‰éªŒè¯å‡½æ•°
+//×¢ÊÍµôÑéÖ¤º¯Êı
 $wechatObj->responseMsg();
 
 class wechatCallbackapiTest
@@ -42,72 +42,72 @@ class wechatCallbackapiTest
             
                 $type =$postObj->MsgType;
                 $customevent =$postObj->Event;
-                //ç»çº¬åº¦
+                //¾­Î³¶È
                 $weiDu = $postObj->Location_X;
                 $jingDu= $postObj->Location_Y;
             
                 $textTpl = "<xml>
-			    <ToUserName><![CDATA[%s]]></ToUserName>
-			    <FromUserName><![CDATA[%s]]></FromUserName>
-			    <CreateTime>%s</CreateTime>
-			    <MsgType><![CDATA[%s]]></MsgType>
-			    <Content><![CDATA[%s]]></Content>
-			    <FuncFlag>0</FuncFlag>
-			    </xml>";
+							<ToUserName><![CDATA[%s]]></ToUserName>
+							<FromUserName><![CDATA[%s]]></FromUserName>
+							<CreateTime>%s</CreateTime>
+							<MsgType><![CDATA[%s]]></MsgType>
+							<Content><![CDATA[%s]]></Content>
+							<FuncFlag>0</FuncFlag>
+							</xml>";
                 
             if($type=="event" and $customevent=="subscribe")
               {
                     $msgType = "text";
-                    $contentStr="æ¬¢è¿å…³æ³¨æµªé‡Œç™½æ¡ï¼Œå¸¸æ¥å’Œæˆ‘èŠå¤©å‘¦^_^ï¼Œå›å¤ã€?ã€‘ã€ï¼Ÿã€‘ã€Hã€‘ã€hã€‘ã€helpã€‘æˆ–ã€å¸®åŠ©ã€‘è·å–æ›´å¤šå¸®åŠ©";                   
+                    $contentStr="»¶Ó­¹Ø×¢ÀËÀï°×Ìõ£¬³£À´ºÍÎÒÁÄÌìßÏ^_^£¬»Ø¸´¡¾?¡¿¡¾£¿¡¿¡¾H¡¿¡¾h¡¿¡¾help¡¿»ò¡¾°ïÖú¡¿»ñÈ¡¸ü¶à°ïÖú";                   
                     $resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
                     echo $resultStr;
                }
             
             switch($type)
               {
-                    //å›¾ç‰‡æ¶ˆæ¯
+                    //Í¼Æ¬ÏûÏ¢
                     case "image":
-                        $contentStr="ä¸é”™è¯¶!";
+                        $contentStr="²»´íÚÀ!";
                         break;
-                    //è¯­éŸ³æ¶ˆæ¯
+                    //ÓïÒôÏûÏ¢
                     case "voice":
-                        $contentStr="ä½ å£°éŸ³çœŸå¥½å¬!";        
+                        $contentStr="ÄãÉùÒôÕæºÃÌı!";        
                         break;
-                    //è§†é¢‘æ¶ˆæ¯
+                    //ÊÓÆµÏûÏ¢
                     case "video":
-                        $contentStr="è¿™ç‰‡å­æˆ‘ç»™æ»¡åˆ†!";     
+                        $contentStr="ÕâÆ¬×ÓÎÒ¸øÂú·Ö!";     
                         break;
-                    //åœ°ç†ä½ç½®æ¶ˆæ¯
+                    //µØÀíÎ»ÖÃÏûÏ¢
                     case "location":
-                        $contentStr="ä½ çš„çº¬åº¦æ˜¯{$weiDu}ï¼Œç»åº¦æ˜¯{$jingDu}ï¼Œå¯¼å¼¹å‡†å¤‡!";   
+                        $contentStr="ÄãµÄÎ³¶ÈÊÇ{$weiDu}£¬¾­¶ÈÊÇ{$jingDu}£¬µ¼µ¯×¼±¸!";   
                         break;
-                    //æ–‡æœ¬æ¶ˆæ¯
+                    //ÎÄ±¾ÏûÏ¢
                     case "text":
                       {
                         if(!empty($keyword))
                           {
-                            if($keyword == "?"||$keyword == "ï¼Ÿ"||$keyword == "H"||$keyword == "h"||$keyword == "help"||$keyword == "å¸®åŠ©")
+                            if($keyword == "?"||$keyword == "£¿"||$keyword == "H"||$keyword == "h"||$keyword == "help"||$keyword == "°ïÖú")
                               {
-                               $contentStr = "äº†è§£æŠ•ç¨¿æ–¹å¼è¯·å›å¤ã€æŠ•ç¨¿ã€‘\næµè§ˆå¾€æœŸå†…å®¹è¯·å›å¤ã€å¾€æœŸã€‘\nlolæŸ¥è¯¢è¯·å›å¤ã€lolã€‘ã€LOLã€‘";
+                               $contentStr = "ÁË½âÍ¶¸å·½Ê½Çë»Ø¸´¡¾Í¶¸å¡¿\nä¯ÀÀÍùÆÚÄÚÈİÇë»Ø¸´¡¾ÍùÆÚ¡¿\nlol²éÑ¯Çë»Ø¸´¡¾lol¡¿¡¾LOL¡¿";
                                $msgType = "text";
                                $resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
                                echo $resultStr;
                               }
-                            elseif($keyword== "lol"||$keyword == "LOL"||$keyword == "è‹±é›„è”ç›Ÿ")
+                            elseif($keyword== "lol"||$keyword == "LOL"||$keyword == "Ó¢ĞÛÁªÃË")
                               {
-                               $contentStr = "<a href='http://www.lolhelper.cn/word.php'>lolå…³é”®è¯æŸ¥è¯¢</a>\n\n<a href='http://www.lolhelper.cn/'>loléšè—åˆ†æŸ¥è¯¢</a>\n\n<a href='http://www.lolhelper.cn/ability.php'>lolç»¼åˆå®åŠ›æŸ¥è¯¢</a>\n\n<a href='http://www.lolhelper.cn/kengdie.php'>lolå‘çˆ¹èƒ½åŠ›æŸ¥è¯¢</a>";
+                               $contentStr = "<a href='http://www.lolhelper.cn/word.php'>lol¹Ø¼ü´Ê²éÑ¯</a>\n\n<a href='http://www.lolhelper.cn/'>lolÒş²Ø·Ö²éÑ¯</a>\n\n<a href='http://www.lolhelper.cn/ability.php'>lol×ÛºÏÊµÁ¦²éÑ¯</a>\n\n<a href='http://www.lolhelper.cn/kengdie.php'>lol¿ÓµùÄÜÁ¦²éÑ¯</a>";
                                $msgType = "text";
                                $resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
                                echo $resultStr;
                               }
-                            elseif($keyword== "ivim"||$keyword == "IVIM"||$keyword == "åšå®¢")
+                            elseif($keyword== "ivim"||$keyword == "IVIM"||$keyword == "²©¿Í")
                               {
-                               $contentStr = "<a href='http://ivim.sinaapp.com'>IVIMåšå®¢</a>";
+                               $contentStr = "<a href='http://ivim.sinaapp.com'>IVIM²©¿Í</a>";
                                $msgType = "text";
                                $resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
                                echo $resultStr;
                               }
-                            elseif($keyword == "å¾€æœŸ"||$keyword == "æŠ•ç¨¿")
+                            elseif($keyword == "ÍùÆÚ"||$keyword == "Í¶¸å")
                                $this ->replyNews($fromUsername, $toUsername, $time, $keyword);
                             else
                                 {
@@ -130,26 +130,26 @@ class wechatCallbackapiTest
              $msgType = "text";
              $resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
              echo $resultStr;
-         //å¯¹åº”if (!empty($postStr))
+         //¶ÔÓ¦if (!empty($postStr))
          }
-    //å¯¹åº”public function responseMsg() 
+    //¶ÔÓ¦public function responseMsg() 
     }
     
     
     
-    //å•å›¾æ–‡å›å¤
+    //µ¥Í¼ÎÄ»Ø¸´
     function replyNews($fromUsername, $toUsername, $time, $keyword){
-          if($keyword=="å¾€æœŸ")
+          if($keyword=="ÍùÆÚ")
             {
-               $title="ã€æµªé‡Œç™½æ¡ã€‘é‚£äº›å«é’æ˜¥å’Œçˆ±å»æ­»çš„æ­Œ";
-               $description="è™½ç„¶æ¯å¤©éƒ½æ˜¯åœ¨å¬ä¸åŒé¢†åŸŸä¸åŒåœ°åŸŸçš„éŸ³ä¹ï¼Œçœ‹ä¸åŒçš„å´åˆèƒ½æ‰¾åˆ°ç›¸åŒç‚¹çš„ç”µå½±ï¼Œæ­£å¦‚é‚£äº›ä»¤äººå¥‹è¿›åˆæºå¸¦ä¸€ç‚¹å°å°æ‚²ä¼¤çš„ä¼˜é›…æ—‹å¾‹ï¼Œé‚£äº›è·³åŠ¨çš„éŸ³ç¬¦æ€»æ˜¯èƒ½é’»è¿›ä½ çš„å¿ƒé‡Œï¼Œæ·±æ·±æ‰æ ¹åœ¨ä½ æŸä¸€ç‰‡è®°å¿†ç¢ç‰‡ä¸­ã€‚";
+               $title="¡¾ÀËÀï°×Ìõ¡¿ÄÇĞ©½ĞÇà´ººÍ°®È¥ËÀµÄ¸è";
+               $description="ËäÈ»Ã¿Ìì¶¼ÊÇÔÚÌı²»Í¬ÁìÓò²»Í¬µØÓòµÄÒôÀÖ£¬¿´²»Í¬µÄÈ´ÓÖÄÜÕÒµ½ÏàÍ¬µãµÄµçÓ°£¬ÕıÈçÄÇĞ©ÁîÈË·Ü½øÓÖĞ¯´øÒ»µãĞ¡Ğ¡±¯ÉËµÄÓÅÑÅĞıÂÉ£¬ÄÇĞ©Ìø¶¯µÄÒô·û×ÜÊÇÄÜ×ê½øÄãµÄĞÄÀï£¬ÉîÉîÔú¸ùÔÚÄãÄ³Ò»Æ¬¼ÇÒäËéÆ¬ÖĞ¡£";
                $picurl="http://mmbiz.qpic.cn/mmbiz/EaNCvycrfVTyQ4gdCSk2E4I8EVXzITich3Clc6miaQ0oZXVPa5tBBibibm6GM4EhmzSIQLjk9fOIz3Ent4bdkT0PwQ/640?wx_fmt=jpeg&tp=webp&wxfrom=5";
                $url="http://mp.weixin.qq.com/s?__biz=MzAwMjI5MDg1MQ==&mid=204677034&idx=1&sn=4c5c983a7e0ec85234cd918dbc445c10#rd";
              }
-          if($keyword=="æŠ•ç¨¿")
+          if($keyword=="Í¶¸å")
             {
-              $title="æœ‰äºº@æˆ‘ï¼šè‡´å°ä¼™ä¼´ä¹¦";
-              $description="é¦–å…ˆæœ‰ä¸ªå¥½æ¶ˆæ¯è¦å‘Šè¯‰å¤§å®¶ï¼Œå¾®ä¿¡åå°å·²æˆåŠŸæ¥å…¥å›¾çµæœºå™¨äººï¼Œæ— èŠçš„æ—¶å€™å¤šæ‰¾ä»–ç©ç©å“¦ã€‚ä¸»é¡µèŒåœ¨ä¹‹åè¿˜ä¼šä¸ºç™½æ¡å›åŠ è®¸è®¸å¤šå¤šæœ‰è¶£çš„åŠŸèƒ½ï¼Œæ•¬è¯·æœŸå¾…å‘¦ã€‚";
+              $title="ÓĞÈË@ÎÒ£ºÖÂĞ¡»ï°éÊé";
+              $description="Ê×ÏÈÓĞ¸öºÃÏûÏ¢Òª¸æËß´ó¼Ò£¬Î¢ĞÅºóÌ¨ÒÑ³É¹¦½ÓÈëÍ¼Áé»úÆ÷ÈË£¬ÎŞÁÄµÄÊ±ºò¶àÕÒËûÍæÍæÅ¶¡£Ö÷Ò³¾úÔÚÖ®ºó»¹»áÎª°×Ìõ¾ı¼ÓĞíĞí¶à¶àÓĞÈ¤µÄ¹¦ÄÜ£¬¾´ÇëÆÚ´ıßÏ¡£";
               $picurl="http://mmbiz.qpic.cn/mmbiz/EaNCvycrfVRw27nqC33qAp2bwnxkmWicVI23NAF7ePfFLRtjoicFMfhGl6UiaUu2NxbicwoRKbpztoZM0nUibH4rKCQ/640?wx_fmt=jpeg&tp=webp&wxfrom=5";
               $url="http://mp.weixin.qq.com/s?__biz=MzAwMjI5MDg1MQ==&mid=400145039&idx=1&sn=4fa0d8cf70eff234ebb2a972fb0c2fb7#wechat_redirect";
              }
@@ -243,19 +243,19 @@ class wechatCallbackapiTest
     }
 
     
-    // å›¾çµæœºå™¨äºº
+    // Í¼Áé»úÆ÷ÈË
     /*function tuling($keyword) {
         header("Content-type: text/html; charset=utf-8"); 
         //$key = "e91017d20d9db8e0b3e3251dffa75a64";
         $key = "d24ad2cd4f8203991ab58de1b36f2b52";
         $api_url = "http://www.tuling123.com/openapi/api?key=".$key."&info=".$keyword;
         $result = file_get_contents ( $api_url );
-        //å¯é€‰,é»˜è®¤ false è½¬ä¸ºå¯¹è±¡,true è½¬ä¸ºæ•°ç»„.
+        //¿ÉÑ¡,Ä¬ÈÏ false ×ªÎª¶ÔÏó,true ×ªÎªÊı×é.
         $result = json_decode ( $result,true ); 
         if($result['code'] == 100000)
           return $result['text'];
     } */
-        // å›¾çµæœºå™¨äºº
+        // Í¼Áé»úÆ÷ÈË
     function tuling($keyword) {
         $key="d24ad2cd4f8203991ab58de1b36f2b52";
         $api_url = "http://www.tuling123.com/openapi/api?key=".$key."&info=".$keyword;
@@ -264,7 +264,7 @@ class wechatCallbackapiTest
         
         switch ($result ['code']) {
           case '200000' :
-            $text = $result ['text'] . ',<a href="' . $result ['url'] . '">ç‚¹å‡»è¿›å…¥</a>';
+            $text = $result ['text'] . ',<a href="' . $result ['url'] . '">µã»÷½øÈë</a>';
             return $text;
             break;
           case '302000' :
